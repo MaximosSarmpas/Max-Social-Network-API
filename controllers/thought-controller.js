@@ -1,8 +1,10 @@
+// Import required models
 const { Thought, User } = require('../models');
 
+// Define thoughtController object
 const thoughtController = {
 
-  // Get all thoughts
+ // Get all thoughts
   getThoughts(req, res) {
     Thought.find()
       .sort({ createdAt: -1 })
@@ -15,7 +17,7 @@ const thoughtController = {
       });
   },
 
-  // Get a single thought by id
+  // Get a single thought by its ID
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
       .then((dbThoughtData) => {
@@ -30,7 +32,7 @@ const thoughtController = {
       });
   },
 
-  // Create a thought
+  // Create a new thought and associate it with a user
   createThought(req, res) {
     console.log(req.body)
     Thought.create(req.body)
@@ -54,7 +56,7 @@ const thoughtController = {
       });
   },
 
-  // Update a thought
+  // Update a thought by its ID
   updateThought(req, res) {
     Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $set: req.body }, { runValidators: true, new: true })
       .then((dbThoughtData) => {
@@ -69,7 +71,7 @@ const thoughtController = {
       });
   },
 
-  // Delete a thought
+  // Delete a thought by its ID and remove it from the associated user's thoughts
   deleteThought(req, res) {
     Thought.findOneAndRemove({ _id: req.params.thoughtId })
       .then((dbThoughtData) => {
@@ -77,7 +79,7 @@ const thoughtController = {
           return res.status(404).json({ message: 'Thought with this ID does not exist.' });
         }
 
-        // remove thought id from user's `thoughts` field
+       
         return User.findOneAndUpdate(
           { thoughts: req.params.thoughtId },
           { $pull: { thoughts: req.params.thoughtId } },
@@ -96,7 +98,7 @@ const thoughtController = {
       });
   },
 
-  // Add a reaction to a thought
+ // Add a reaction to a thought by its ID
   addReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -115,7 +117,7 @@ const thoughtController = {
       });
   },
 
-  // Remove reaction from a thought
+ 
   removeReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
