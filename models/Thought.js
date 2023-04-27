@@ -1,11 +1,14 @@
+
+// Importing the moment library to format dates
 const moment = require('moment');
 
-// Define Mongoose
+// Importing the Schema and model objects from the Mongoose library
 const { Schema, model } = require('mongoose');
 
+// Importing the reactionSchema object from another file
 const reactionSchema = require('./Reaction');
 
-//  Define the shape of the documents within the collection.
+// Creating a new Mongoose schema for thoughts
 const thoughtSchema = new Schema(
     {
       thoughtText: {
@@ -33,13 +36,14 @@ const thoughtSchema = new Schema(
     }
   );
   
-
+// Adding a virtual property to the schema that returns the number of reactions
   thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
   });
   
-  // thoughtSchema is the name of the schema we are using to create a new instance of the model
+ // Creating a Mongoose model for the thought schema 
   const Thought = model('Thought', thoughtSchema);
-  
+ 
+// Exporting the Thought model
   module.exports = Thought;
   
