@@ -1,12 +1,14 @@
-// Define Mongoose
 
+
+// Import the required modules from the mongoose package
 const { Schema, model } = require('mongoose');
 
 
-//  Define the shape of the documents within the collection.
+// Define a new schema for the User model
 const userSchema = new Schema(
     {
-      username: {
+       // Define the username field with type, required, unique, and trim properties
+    username: {
         type: String,
         required: true,
         unique: true,
@@ -32,6 +34,7 @@ const userSchema = new Schema(
       ],
     },
     {
+       // Configure the schema to include virtuals when converting to JSON
       toJSON: {
         virtuals: true,
       },
@@ -39,12 +42,13 @@ const userSchema = new Schema(
     }
   );
   
-  // Create a virtual property `friendCount` that gets the amount of friends
+ 
   userSchema.virtual('friendCount').get(function () {
     return this.friends.length;
   });
   
-    // userSchema is the name of the schema we are using to create a new instance of the model
+   // Create the User model using the userSchema
   const User = model('User', userSchema);
   
+// Export the User model
   module.exports = User;
