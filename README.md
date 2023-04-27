@@ -1,6 +1,7 @@
 # Social Network API
   ![Github License](https://img.shields.io/badge/license-MIT-green)
-  
+  ![Screenshot 2023-04-27 142439](https://user-images.githubusercontent.com/117605647/234957617-fe060dbe-f72d-4129-9170-6cda149ad06a.png)
+
   screencastify LINK: https://drive.google.com/file/d/1H6JTqNLWTAgaG1GWoaCXIRahr118a5I2/view
   ## Table of Contents
   
